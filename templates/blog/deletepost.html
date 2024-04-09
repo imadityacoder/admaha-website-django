@@ -1,0 +1,17 @@
+{% extends "blog/main.html" %}
+
+{% block title %}Delete post | Admoha.com{% endblock title %}
+{% block body %}
+<div class="form-group container border p-5" style = "margin-bottom:220px;">
+<h1>Delete post</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <hr>
+    <img src="{{blog.img.url}}" class="img-fluid" alt="{{blog.img.url}}" style="min-width:60%;">
+    <h5>Delete the post <br>({{blog.title}})</h5>
+    <p>Are you sure!</p>
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <button type="btn" class="btn btn-primary"><a href = "{% url "home" %}" style="color:white;">NO, back</a></button>
+</form>
+</div>
+{% endblock body %}

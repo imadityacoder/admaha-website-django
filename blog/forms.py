@@ -1,19 +1,32 @@
-from django import forms 
-from tinymce import TinyMCE 
+# forms.py
+from django import forms
 from .models import Blog
 
 
-class TinyMCEWidget(TinyMCE): 
-	def use_required_attribute(self, *args): 
-		return False
+class BlogForm(forms.ModelForm):
 
-
-class PostForm(forms.ModelForm): 
-	content = forms.CharField( 
-		widget=TinyMCEWidget( 
-			attrs={'required': False, 'cols': 30, 'rows': 10} 
-		) 
-	) 
-	class Meta: 
+	class Meta:
 		model = Blog
-		fields = '__all__'
+		fields = ['title', 'img']
+
+class AddForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ("title","category","author","img","body")
+        widgets = {
+            "title":forms.TextInput(attrs={'class':'form-control'}),
+            "author":forms.Select(attrs={'class':'form-control'}),
+            "category":forms.Select(attrs={'class':'form-control'}),
+            "img":forms.FileInput(),
+            "body":forms.Textarea(attrs={'class':'form-control'}),
+        }
+class UpdateForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ("title","category","img","body")
+        widgets = {
+            "title":forms.TextInput(attrs={'class':'form-control'}),
+            "category":forms.Select(attrs={'class':'form-control'}),
+            "img":forms.FileInput(),
+            "body":forms.Textarea(attrs={'class':'form-control'}),
+        }

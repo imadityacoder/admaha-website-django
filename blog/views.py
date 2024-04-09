@@ -1,23 +1,47 @@
 from django.shortcuts import render
+from django.views.generic import CreateView,DeleteView,UpdateView,ListView,DetailView
+from .models import Blog,Category
+from .forms import AddForm,UpdateForm
+from django.urls import reverse_lazy
 
+
+categories = Category.objects.all()
+cat_data = {"categories":categories,}
 # Create your views here.
 def home(request):
-    return render(request,'blog/home.html')
+    posts = Blog.objects.all()
+    data = {"posts":posts,"categories":categories,}
+     
+    return render(request,'blog/home.html',data)
 
 def about(request):
-    return render(request,'blog/about.html')
+    return render(request,'blog/about.html',cat_data)
 
 def contact(request):
-    return render(request,'blog/contact.html')
+    return render(request,'blog/contact.html',cat_data)
 
-def detailview(request,slug):
-    return render(request,'blog/detailview.html')
+def category(request,cat):
+    category_posts = Blog.objects.filter(category=cat)
+    data = {"category_posts":category_posts}
+    return render(request,'blog/category.html',data)
+    
 
-def create(request,slug):
-    return render(request,'blog/createpost.html')
+class detailview(DetailView):
+    model = Blog
+    template_name = "blog/detailview.html"
+    slug_url_kwarg = 'slug'
 
-def update(request,slug):
-    return render(request,'blog/updatepost.html')
+class createpost(CreateView):
+    model = Blog
+    template_name = "blog/createpost.html"
+    form_class  = AddForm
 
-def delete(request,slug):
-    return render(request,'blog/deletepost.html')
+class updatepost(UpdateView):
+    model = Blog
+    template_name = 'blog/updatepost.html'
+    form_class = UpdateForm
+
+class deletepost(DeleteView):
+    model = Blog
+    template_name = 'blog/deletepost.html'
+    success_url = reverse_lazy('bloghome')

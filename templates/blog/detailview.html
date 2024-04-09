@@ -1,2 +1,24 @@
 {% extends "blog/main.html" %}
 
+{% block title %}{{blog.title}} | Admoha.com{% endblock title %}
+
+{% block body %}
+<div class="container">
+
+    <div class="my-1">
+        <h1 style="display: inline;">{{blog.title}}</h1>
+        <p style="display: inline;" ><small>({{blog.category}})</small></p>
+        <p><small>Last updated {{blog.publish_on}}</small></p>
+        <a href="{% url 'updatepost' blog.slug%}">[update]</a>
+        <a href="{% url 'deletepost' blog.slug%}">[delete]</a>
+    </div>
+    
+    <img class="img-fluid" src="{{blog.img.url}}" alt="{{blog.img.url}}" style="width:100%;">
+    <hr>
+    <div>{{blog.body | safe}}</div>
+    
+    <p><small>-by {{blog.author|capfirst}}</small></p>
+</div>
+<hr>
+
+{% endblock body %}

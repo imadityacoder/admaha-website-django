@@ -1,0 +1,15 @@
+{% extends "blog/main.html" %}
+
+{% block title %}Create Post{% endblock title %}
+
+{% block body %}
+<div class="form-group container my-3 border p-3">
+    <h1>Add a new post</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    {{form.media}}
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+</div>
+{% endblock body %}
