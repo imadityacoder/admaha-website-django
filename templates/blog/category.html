@@ -1,26 +1,26 @@
 {% extends "blog/main.html" %}
 
-
-<h2>recent post</h2>
-    <div class="container">
-        <div class="row">
-    {% for post in category_posts %}
+{% block body %}
+<div class="container">
+  <h2>{{cat}}</h2>
+  <div class="row">
+    {% for posts in category_posts%}
     <div class="col-lg-4 col-md-6 col-sm-12 my-3 ">
-            <a href = {% url "detailview" post.slug%}>
+            <a href = {% url "detailview" posts.slug%}>
             <div class="card shadow-sm">
-              <img src="{{post.img.url}}"
-                alt="{{post.img.url}}">
+              <img src="{{posts.img.url}}"
+                alt="{{posts.img.url}}">
               <div class="card-body">
-                <h2 class="card-text">{{post.title}}</h2>
-                <small class="text-body-secondary pb-3">({{post.category}})</small>
-                <small class="text-body-secondary pb-3">Created by -{{post.author}}</small>
-                <p class="card-text">{{post.body |safe |truncatechars:155}}</p>
+                <h2 class="card-text">{{posts.title}}</h2>
+                <small class="text-body-secondary pb-3">({{posts.category}})</small>
+                <small class="text-body-secondary pb-3">Created by -{{posts.author}}</small>
+                <p class="card-text">{{posts.body | safe |truncatechars:155}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                   </div>
-                  <small class="text-body-secondary">{{post.publish_on}}</small>
+                  <small class="text-body-secondary">{{posts.created_on}}</small>
                 </div>
               </div>
             </div>
@@ -31,3 +31,5 @@
         </div>
     
       </div>
+
+{% endblock body %}

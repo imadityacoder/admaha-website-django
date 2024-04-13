@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.views.generic import CreateView,DeleteView,UpdateView,ListView,DetailView
-from .models import Blog,Category
-from .forms import AddForm,UpdateForm
+from django.shortcuts import render,redirect
+from django.views.generic import CreateView,DeleteView,UpdateView,DetailView
+from .models import Blog,Category #,Contact
+from .forms import AddForm,UpdateForm #,ContactForm
+from admoha_website import settings
 from django.urls import reverse_lazy
+
 
 
 categories = Category.objects.all()
@@ -15,14 +17,22 @@ def home(request):
     return render(request,'blog/home.html',data)
 
 def about(request):
+    
     return render(request,'blog/about.html',cat_data)
 
-def contact(request):
-    return render(request,'blog/contact.html',cat_data)
-
+# def contact(request):
+#     sub = ContactForm()
+#     if request.method == 'POST':
+#         sub = ContactForm(request.POST)
+#         if sub.is_valid():
+#             sub.save()
+#             return render(request, 'blog/home.html')
+#     return render(request, 'blog/contact.html', {'form': sub})
+    
 def category(request,cat):
-    category_posts = Blog.objects.filter(category=cat)
-    data = {"category_posts":category_posts}
+    category_posts = Blog.objects.filter(category=Category.objects.get(name=cat))
+    data = {"category_posts":category_posts,
+            "cat":cat}
     return render(request,'blog/category.html',data)
     
 
@@ -44,4 +54,4 @@ class updatepost(UpdateView):
 class deletepost(DeleteView):
     model = Blog
     template_name = 'blog/deletepost.html'
-    success_url = reverse_lazy('bloghome')
+    success_url = reverse_lazy('home')

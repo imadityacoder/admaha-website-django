@@ -80,15 +80,21 @@ WSGI_APPLICATION = 'admoha_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.mysql',
+# 		'NAME': 'testDB',
+# 		'USER': 'root',
+# 		'PASSWORD': 'root',
+# 		'HOST':'localhost',
+# 		'PORT':'3306',
+# 	}
+# }
 DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'testDB',
-		'USER': 'root',
-		'PASSWORD': 'root',
-		'HOST':'localhost',
-		'PORT':'3306',
-	}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -138,3 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+
+
+EMAIL_RECEIVING_USER = 'vishalxamit@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

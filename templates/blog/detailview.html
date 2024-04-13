@@ -8,7 +8,7 @@
     <div class="my-1">
         <h1 style="display: inline;">{{blog.title}}</h1>
         <p style="display: inline;" ><small>({{blog.category}})</small></p>
-        <p><small>Last updated {{blog.publish_on}}</small></p>
+        <p><small>Last updated {{blog.updated_on}}</small></p>
         <a href="{% url 'updatepost' blog.slug%}">[update]</a>
         <a href="{% url 'deletepost' blog.slug%}">[delete]</a>
     </div>

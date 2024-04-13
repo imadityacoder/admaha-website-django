@@ -17,7 +17,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def get_absolute_url(self):
-        return reverse("category", kwargs={"slug": self.slug})    
+        return reverse("category", kwargs={"slug": self.slug})
 
 class Blog(models.Model):
     title = models.CharField(max_length=255,unique=True)
@@ -26,7 +26,8 @@ class Blog(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE,null=True,blank=True)
     img = models.ImageField(upload_to="images/")
     body =   RichTextField(blank=True,null=True)
-    publish_on = models.DateTimeField(auto_now_add=True) 
+    updated_on = models.DateTimeField(auto_now= True)
+    created_on = models.DateTimeField(auto_now_add=True) 
 
     def __str__(self):
         return self.title + " | " + str(self.author)
@@ -34,9 +35,4 @@ class Blog(models.Model):
     def get_absolute_url(self):
         return reverse("detailview", kwargs={"slug": self.slug})
 
-class Contact(models.Model):
-    name = models.CharField(max_length = 50)
-    email = models.EmailField( max_length=50)
-    phone = models.CharField(max_length=10)
-    massage = models.TextField(max_length=254)
-    date = models.DateTimeField(auto_now_add=True) 
+
