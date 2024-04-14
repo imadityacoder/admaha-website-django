@@ -45,6 +45,9 @@ MY_APPS = [
 
 INSTALLED_APPS += MY_APPS
 
+AUTHENTICATION_BACKENDS=[
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'admoha_website.wsgi.application'
 
+TIME_ZONE =  'Asia/Kolkata'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

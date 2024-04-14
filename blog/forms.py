@@ -4,7 +4,6 @@ from .models import Blog #,Contact
 
 
 class BlogForm(forms.ModelForm):
-
 	class Meta:
 		model = Blog
 		fields = ['title', 'img']
@@ -20,6 +19,7 @@ class AddForm(forms.ModelForm):
             "img":forms.FileInput(),
             "body":forms.Textarea(attrs={'class':'form-control'}),
         }
+
 class UpdateForm(forms.ModelForm):
     class Meta:
         model = Blog
@@ -43,3 +43,23 @@ class UpdateForm(forms.ModelForm):
 #             "message":forms.Textarea(attrs={'class':'form-control'}),
             
 #         }
+
+# accounts/forms.py
+
+class signupForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+
+
+class loginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)
+    
+    widgets = {
+            'username':forms.TextInput(attrs={'class':'form-control','placeholder':"username"}),
+            'password':forms.PasswordInput(attrs={'class':'form-control','placeholder':"password"}),
+
+        }
+

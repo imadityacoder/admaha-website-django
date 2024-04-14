@@ -1,0 +1,32 @@
+
+{% extends "blog/main.html" %}
+{% block body %}
+<div class="container col-lg-6 col-md-8 col-sm-12">
+<main class="form-signin w-100 m-auto">
+    <form method= "POST">
+      {% csrf_token %}
+      <h1 class="h2 mb-3 fw-normal">Please Signup</h1>
+  
+      <div class="form-floating m-1">
+        <input type="text" class="form-control" id="{{form.username.name}}" placeholder="Username" name="{{form.username.name}}" value="{{form.username.value}}">
+        <label for="{{form.username.id_for_label}}">Username</label>
+        <span class="text-danger">{{form.username.errors}}</span>
+    </div>
+    
+    <div class="form-floating m-1">
+        <input type="password" class="form-control" id="{{form.password1.name}}" placeholder="Password1" name="{{form.password1.name}}" value="{{form.password1.value}}">
+        <label for="{{form.password1.name}}">Password</label>
+        <span class="text-danger">{{form.password1.errors}}</span>
+    </div>
+    <div class="form-floating m-1">
+        <input type="password" class="form-control" id="{{form.password2.name}}" placeholder="Password2" name="{{form.password2.name}}" value="{{form.password1.value}}">
+        <label for="{{form.password2.name}}">Confirm Password</label>
+        <span class="text-danger">{{form.password2.errors}}</span>
+    </div>
+
+    <button class="btn btn-primary w-100 py-2 my-3" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
+    </form>
+  </main>
+</div>
+{% endblock body %}

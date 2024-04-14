@@ -1,0 +1,26 @@
+
+{% extends "blog/main.html" %}
+{% block body %}
+<div class="container col-lg-6 col-md-8 col-sm-12">
+<main class="form-signin w-100 m-auto">
+    <form method= "POST">
+      {% csrf_token %}
+      <h1 class="h2 mb-3 fw-normal">Welcome back, Login</h1>
+  
+      <div class="form-floating m-1">
+        <input type="text" class="form-control" id="{{form.username.name}}" placeholder="Username" name="{{form.username.name}}" value="{{form.username.value}}"> 
+        <label for="{{form.username.id_for_label}}">Username</label>
+        <span>{{form.username.errors}}</span>
+    </div>
+    <div class="form-floating m-1">
+        <input type="password" class="form-control" id="{{form.password.name}}" placeholder="Password" name="{{form.password.name}}" value="{{form.password.value}}" >
+        <label for="{{form.password.name}}">Password</label>
+        <span>{{form.password.errors}}</span>
+    </div>
+
+      <button class="btn btn-primary w-100 py-2 my-3" type="submit">Log in</button>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
+    </form>
+  </main>
+</div>
+{% endblock body %}
