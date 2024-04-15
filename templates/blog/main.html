@@ -95,7 +95,7 @@
   <!-- navbar section   -->
   <nav class="navbar navbar-expand-md fixed-top bg-lightblue" data-bs-theme="light" aria-label="Light offcanvas navbar">
     <div class="container-fluid ">
-      <h1><a class="navbar-brand" href="/">Admoha.com</a></h1>
+      <h1><a class="navbar-brand" href="{% url "home" %}">Admoha.com</a></h1>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight"
         aria-controls="offcanvasNavbarLight" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -109,32 +109,42 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-center flex-grow-1 pt-2">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link active" aria-current="page" href="{% url "home" %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
+              <a class="nav-link active" href="{% url "about" %}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contact">Contact</a>
+              <a class="nav-link active" href="{% url "contact" %}">Contact</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="/create">create</a>
+              <a class="nav-link active" href="{% url "createpost" %}">create post</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin">admin</a>
-            </li>
-
-
+          </ul>
+            <ul class="navbar-nav justify-content-right pt-2">
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url "logout" %}">logout</a>
+              </li>
+              <li class="nav-item">
+                <p class="nav-link">{{blog.user}}</p>
+              </li>
+              {% comment %} <li class="nav-item">
+                <a class="nav-link active" href="{% url "userposts" post.user%}">my posts</a>
+              </li> {% endcomment %}
+            </ul>
+          </div>
+            {% else %}
           </ul>
           <ul class="navbar-nav justify-content-right pt-2">
             <li class="nav-item">
-              <a class="nav-link" href="/login">login</a>
+              <a class="nav-link active" href="{% url "login" %}">login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/signup">signup</a>
+              <a class="nav-link active" href="{% url "signup" %}">signup</a>
             </li>
           </ul>
-
+          {% endif %}
         </div>
       </div>
     </div>

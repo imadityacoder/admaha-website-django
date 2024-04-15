@@ -1,8 +1,9 @@
 
 {% extends "blog/main.html" %}
 {% block body %}
-<div class="container col-lg-6 col-md-8 col-sm-12">
-<main class="form-signin w-100 m-auto">
+<div class="container col-lg-6 col-md-8 col-sm-12  pb-5 my-5">
+  <main class="form-signin w-100 m-auto">
+    <h1 class="h1 mb-5 text-center">Admoha.com</h1>
     <form method= "POST">
       {% csrf_token %}
       <h1 class="h2 mb-3 fw-normal">Welcome back, Login</h1>
@@ -19,8 +20,8 @@
     </div>
 
       <button class="btn btn-primary w-100 py-2 my-3" type="submit">Log in</button>
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
     </form>
+    <a href="/signup">Already have an account.</a>
   </main>
 </div>
 {% endblock body %}

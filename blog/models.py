@@ -3,6 +3,7 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from django.urls import reverse
+from admoha_website import settings
 
 # Create your models here.
 class Category(models.Model):

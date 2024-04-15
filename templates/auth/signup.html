@@ -1,11 +1,12 @@
 
 {% extends "blog/main.html" %}
 {% block body %}
-<div class="container col-lg-6 col-md-8 col-sm-12">
+<div class="container col-lg-6 col-md-8 col-sm-12  pb-5 my-5">
 <main class="form-signin w-100 m-auto">
+  <h1 class="h1 mb-5 text-center">Admoha.com</h1>
     <form method= "POST">
       {% csrf_token %}
-      <h1 class="h2 mb-3 fw-normal">Please Signup</h1>
+      <h1 class="h3 mb-3 fw-normal">Please Signup</h1>
   
       <div class="form-floating m-1">
         <input type="text" class="form-control" id="{{form.username.name}}" placeholder="Username" name="{{form.username.name}}" value="{{form.username.value}}">
@@ -13,6 +14,11 @@
         <span class="text-danger">{{form.username.errors}}</span>
     </div>
     
+    <div class="form-floating m-1">
+        <input type="email" class="form-control" id="{{form.email.name}}" placeholder="Email address" name="{{form.email.name}}" value="{{form.email.value}}">
+        <label for="{{form.email.name}}">Email address</label>
+        <span class="text-danger">{{form.email.errors}}</span>
+    </div>
     <div class="form-floating m-1">
         <input type="password" class="form-control" id="{{form.password1.name}}" placeholder="Password1" name="{{form.password1.name}}" value="{{form.password1.value}}">
         <label for="{{form.password1.name}}">Password</label>
@@ -25,8 +31,8 @@
     </div>
 
     <button class="btn btn-primary w-100 py-2 my-3" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
     </form>
   </main>
+  <a href="/login">Create a new account.</a>
 </div>
 {% endblock body %}
