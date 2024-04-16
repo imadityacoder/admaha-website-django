@@ -1,0 +1,37 @@
+{% extends "blog/main.html" %}
+
+{% block title %}{{user}} posts{% endblock title %}
+
+{% block body %}
+{% if user_posts %}
+<div class="container">
+  <h2>your posts</h2>
+  <div class="row">
+    {% for post in user_posts%}
+    <div class="col-lg-4 col-md-6 col-sm-12 my-3 ">
+            <a href = {% url "detailview" post.slug%}>
+            <div class="card shadow-sm">
+              <img src="{{post.img.url}}"
+                alt="{{post.img.url}}">
+              <div class="card-body">
+                <h2 class="card-text">{{post.title}}</h2>
+                <small class="text-body-secondary pb-3">({{post.category}})</small>
+                <small class="text-body-secondary pb-3">Created by -{{post.author}}</small>
+                <p class="card-text">{{post.body | safe |truncatechars:155}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-body-secondary">{{post.created_at}}</small>
+                </div>
+              </div>
+            </div>
+          </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+{% else %}
+<div class="container m-auto p-4">
+  <button type="button"><a href="{% url "createpost" %}">Create a post now</a></button>
+
+</div>   
+{% endif %}
+{% endblock body %}

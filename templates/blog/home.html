@@ -7,26 +7,24 @@
 {% block body %}
 {% load static %}
 
-  <!-- components section  -->
+<!-- components section  -->
 
 
-  <main class="container-fluid ">
-    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-      <div class="col-lg-6 px-0">
-        <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-        <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently
-          about what’s most interesting in this post’s contents.</p>
-      </div>
-      
+<main class="container-fluid ">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="col-lg-6 px-0">
+      <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
+      <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently
+        about what’s most interesting in this post’s contents.</p>
     </div>
+  </div>
+</main>
 
-  </main>
 
 
-
-  <!-- body section cards  -->
-<div class="container"  data-bs-theme="dark">
-<div class="row mb-2">
+<!-- body section cards  -->
+<div class="container" data-bs-theme="dark">
+  <div class="row mb-2">
 
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -38,46 +36,37 @@
             additional content.</p>
           <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
             Continue reading
-
           </a>
         </div>
       </div>
     </div>
-
-
-
-</div>
+  </div>
 </div>
 
-  <!-- body section card 2 -->
+<!-- body section card 2 -->
 {% if posts%}
-  <div class="container">
-    <h2>recent post</h2>
-    <div class="row">
-{% for post in posts %}
-<div class="col-lg-4 col-md-6 col-sm-12 my-3 ">
-        <a href = {% url "detailview" post.slug%}>
+<div class="container">
+  <h2>recent post</h2>
+  <div class="row">
+    {% for post in posts %}
+    <div class="col-lg-4 col-md-6 col-sm-12 my-3 ">
+      <a href={% url "detailview" post.slug%}>
         <div class="card shadow-sm">
-          <img src="{{post.img.url}}"
-            alt="{{post.img.url}}" style="max-height:40%;">
+          <img src="{{post.img.url}}" alt="{{post.img.url}}" style="max-height:40%;">
           <div class="card-body">
             <h2 class="card-text">{{post.title}}</h2>
             <small class="text-body-secondary pb-3">({{post.category}})</small>
             <small class="text-body-secondary pb-3">Created by -{{post.author}}</small>
             <p class="card-text">{{post.body |safe |truncatechars:155}}</p>
             <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-              </div>
-              <small class="text-body-secondary">{{post.created_on}}</small>
+              <small class="text-body-secondary">{{post.created_at}}</small>
             </div>
           </div>
         </div>
       </a>
-      </div>
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
-  {% endif %}
+</div>
+{% endif %}
 {% endblock body %}

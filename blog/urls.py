@@ -10,7 +10,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    # path('<str:user>/posts/',views.userposts,name="userposts"),
+    path('<str:username>/posts/',views.userposts,name="userposts"),
 
     path('category/<str:cat>/', views.category, name='category'),
     path('create/', views.createpost.as_view(), name='createpost'),

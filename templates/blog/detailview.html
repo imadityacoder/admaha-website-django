@@ -1,6 +1,6 @@
 {% extends "blog/main.html" %}
 
-{% block title %}{{blog.title}} | Admoha.com{% endblock title %}
+{% block title %}{{blog.title}}{% endblock title %}
 
 {% block body %}
 <div class="container">
@@ -9,8 +9,14 @@
         <h1 style="display: inline;">{{blog.title}}</h1>
         <p style="display: inline;" ><small>({{blog.category}})</small></p>
         <p><small>Last updated {{blog.updated_on}}</small></p>
+        {% if blog.author == request.user %}
         <a href="{% url 'updatepost' blog.slug%}">[update]</a>
+        {% endif %}
+        {% if request.user.username == "aditya" %}
         <a href="{% url 'deletepost' blog.slug%}">[delete]</a>
+        {% endif %}
+
+        
     </div>
     
     <img class="img-fluid" src="{{blog.img.url}}" alt="{{blog.img.url}}" style="width:100%;">

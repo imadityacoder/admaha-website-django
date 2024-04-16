@@ -1,5 +1,7 @@
 {% extends "blog/main.html" %}
 
+{% block title %}{{cat}}{% endblock title %}
+
 {% block body %}
 {% if category_posts %}
 <div class="container">
@@ -21,7 +23,7 @@
                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                   </div>
-                  <small class="text-body-secondary">{{posts.created_on}}</small>
+                  <small class="text-body-secondary">{{posts.created_at}}</small>
                 </div>
               </div>
             </div>
