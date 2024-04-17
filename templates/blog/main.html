@@ -18,6 +18,7 @@
       font-optical-sizing: auto;
       font-weight: auto;
       font-style: normal;
+      scroll-behavior: smooth;
     }
     .bg-lightblue{
       background-color: #c7e6fc;
@@ -68,14 +69,17 @@
       }
     }
 
-
+    
     .nav-scroller {
       position: relative;
       z-index: 2;
       height: 2.75rem;
       overflow-y: hidden;
     }
-
+    
+    a:hover{
+      color: rgb(255, 255, 255);
+    }
     .nav-scroller .nav {
       display: flex;
       flex-wrap: nowrap;
@@ -95,7 +99,7 @@
   <!-- navbar section   -->
   <nav class="navbar navbar-expand-md fixed-top bg-lightblue" data-bs-theme="light" aria-label="Light offcanvas navbar">
     <div class="container-fluid ">
-      <h1><a class="navbar-brand" href="{% url "home" %}">Admoha.com</a></h1>
+      <h1><a class="navbar-brand" href='{% url "home" %}'>Admoha.com</a></h1>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight"
       aria-controls="offcanvasNavbarLight" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -124,6 +128,17 @@
             <li class="nav-item">
               <a class="nav-link active" href="{% url "contact" %}">Contact</a>
             </li>
+            <li class="nav-item dropdown ms-3">
+              <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               categories
+              </a>
+              <ul class="dropdown-menu">
+                {% for category in categories %}
+                <li><a class="dropdown-item" href="{% url "category" category.slug%}">{{category}}</a></li>
+                {%endfor%}
+              </ul>
+            </li>
+    
             {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link active" href="{% url "createpost" %}">create post</a>

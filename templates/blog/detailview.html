@@ -7,12 +7,12 @@
 
     <div class="my-1">
         <h1 style="display: inline;">{{blog.title}}</h1>
-        <p style="display: inline;" ><small>({{blog.category}})</small></p>
+        <p style="display: inline;"><small>({{blog.category}})</small></p>
         <p><small>Last updated {{blog.updated_on}}</small></p>
         {% if blog.author == request.user %}
         <a href="{% url 'updatepost' blog.slug%}">[update]</a>
         {% endif %}
-        {% if request.user.username == "aditya" %}
+        {% if request.user.username == "aditya" or "vishalkr"%}
         <a href="{% url 'deletepost' blog.slug%}">[delete]</a>
         {% endif %}
 

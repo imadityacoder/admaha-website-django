@@ -1,7 +1,8 @@
 # forms.py
 from django import forms
 from .models import Blog ,Contact
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class BlogForm(forms.ModelForm):
 	class Meta:
@@ -14,7 +15,6 @@ class AddForm(forms.ModelForm):
         fields = ("title","category","img","body")
         widgets = {
             "title":forms.TextInput(attrs={'class':'form-control'}),
-
             "category":forms.Select(attrs={'class':'form-control'}),
             "img":forms.FileInput(),
             "body":forms.Textarea(attrs={'class':'form-control'}),
@@ -44,20 +44,12 @@ class ContactForm(forms.ModelForm):
         }
 
 
-class signupForm(forms.Form):
-    username = forms.CharField(max_length=100)
+class SignUpForm(UserCreationForm):
     email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
 
-
-class loginForm(forms.Form):
-    username = forms.CharField(max_length=100)
-    password = forms.CharField(widget=forms.PasswordInput)
-    
-    widgets = {
-            'username':forms.TextInput(attrs={'class':'form-control','placeholder':"username"}),
-            'password':forms.PasswordInput(attrs={'class':'form-control','placeholder':"password"}),
-
-        }
 

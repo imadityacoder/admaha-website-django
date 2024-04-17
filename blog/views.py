@@ -4,11 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog,Category ,Contact
 from django.contrib.auth.models import User
-from .forms import AddForm,UpdateForm ,ContactForm
+from .forms import AddForm,UpdateForm ,ContactForm,SignUpForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login as auth_login, logout as auth_logout
+from django.contrib.auth import login as auth_login, logout as auth_logout , authenticate 
 
 
 def home(request):
@@ -26,9 +26,12 @@ def contact(request):
             form.save()
             messages.success(request, f'Your message is successfully submited!')
             return redirect('home')
+        
+        if not form.is_valid():
+            messages.warning(request, f'Please, fill the form properly!')
     else:
-        messages.warning(request, f'Please, fill the form properly!')
         form = ContactForm()
+
     return render(request, 'blog/contact.html', {'form': form})
 
     
@@ -78,13 +81,23 @@ class deletepost(LoginRequiredMixin, DeleteView):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
             messages.success(request,'Congratulation,You are now a Admoha.com user !') 
-            return redirect('login')
+            if user is not None:
+                auth_login(request, user) 
+                return redirect('home') 
+        else:
+            messages.warning(request, f'Please fill Signup form properly!')
+            initial_data = {"username":'',"email":'',"password1":'',"password2":''}
+            form = SignUpForm(initial = initial_data)    
+
     else:
-        initial_data = {"username":'',"password1":'',"password2":''}
+        initial_data = {"username":'',"email":'',"password1":'',"password2":''}
         form = UserCreationForm(initial = initial_data)
     return render(request, 'auth/signup.html', {'form': form})
 
@@ -96,6 +109,10 @@ def login(request):
             auth_login(request, user)
             messages.success(request, f'Weclome, back {request.user.username}')
             return redirect('home')
+        else:
+            messages.warning(request, f'User which you entered is not exist!')
+            initial_data = {"username":'',"password":''}
+            form = AuthenticationForm(initial = initial_data)
     else:
         initial_data = {"username":'',"password":''}
         form = AuthenticationForm(initial = initial_data)

@@ -7,13 +7,13 @@
 <main class="form-signin w-100 m-auto">
   <h1 class="h1 mb-5 text-center">Admoha.com</h1>
     <form method= "POST">
-      {% csrf_token %}
       <h1 class="h3 mb-3 fw-normal">Please Signup</h1>
-  
+      
       <div class="form-floating m-1">
         <input type="text" class="form-control" id="{{form.username.name}}" placeholder="Username" name="{{form.username.name}}" value="{{form.username.value}}">
         <label for="{{form.username.id_for_label}}">Username</label>
         <span class="text-danger">{{form.username.errors}}</span>
+        {% csrf_token %}
     </div>
     
     <div class="form-floating m-1">
@@ -35,6 +35,7 @@
     <button class="btn btn-primary w-100 py-2 my-3" type="submit">Sign in</button>
     </form>
   </main>
-  <a href="/login">Create a new account.</a>
+  <a href="/login">Already have an account.</a>
+  
 </div>
 {% endblock body %}
