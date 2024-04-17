@@ -5,3 +5,4 @@ from .models import Category,Blog,Contact
 admin.site.register(Blog)
 admin.site.register(Category)
 admin.site.register(Contact)
+

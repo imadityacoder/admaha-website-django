@@ -2,29 +2,65 @@
 
 {% block title %}Home{% endblock title %}
 
-{% block head %}{% endblock head %}
+{% block head %}
+<style>
+      .jumbotron {
+      background-image: url('https://t4.ftcdn.net/jpg/03/08/69/75/360_F_308697506_9dsBYHXm9FwuW0qcEqimAEXUvzTwfzwe.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white; /* Text color */
+      position: relative;
+      overflow: hidden;
+      z-index: -1;
+      padding: 120px 40px;
+      /* Hide overflow for dim effect */
+    }
+    /* Style for dim effect */
+    .dim-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3); 
+      z-index: -1;/* Adjust the opacity for dim effect */
+    }
+    .text-light {
+      color: rgb(255, 255, 255);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      z-index: 2; /* Adjust the opacity for lighter text */
+    }
+</style>
+{% endblock head %}
 
-{% block body %}
 {% load static %}
-
-<!-- components section  -->
-
-
-<main class="container-fluid ">
-  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-    <div class="col-lg-6 px-0">
-      <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-      <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently
-        about what’s most interesting in this post’s contents.</p>
-    </div>
+{% block body %}
+<div class="jumbotron jumbotron-fluid mb-4">
+  <div class="dim-overlay"></div>
+  <div class="container text-center">
+    <h1 class="display-4 text-light">Welcome to Our Website</h1>
+    <p class="lead text-light">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
   </div>
-</main>
+</div>
 
-
-
-<!-- body section cards  -->
 <div class="container" data-bs-theme="dark">
   <div class="row mb-2">
+    
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
+          <h3 class="mb-0">Featured post</h3>
+          <div class="mb-1 text-body-secondary">Nov 12</div>
+          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to
+            additional content.</p>
+          <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+            Continue reading
+          </a>
+        </div>
+      </div>
+    </div>
+
 
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -43,6 +79,15 @@
   </div>
 </div>
 
+<main class="container-fluid ">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="col-lg-6 px-0">
+      <h1 class="display-4 fst-italic">Vision on authors</h1>
+          <p class="card-text mb-auto"><b>Aditya</b> is the author of this blog website, where he shares various types of information with the readers. Alongside Aditya, <b>Vishal</b> also contributes as a co-author, offering insights, tips, and knowledge on different topics. Together, they are like the storytellers behind the scenes, passionately sharing their expertise through engaging posts. Additionally, they actively promote their posts to reach a wider audience and help more people discover valuable information. You can learn more about them and their interests in the <a href="/about">about us</a> section of the blog.</p>
+          <p class="lead my-3"></p>
+    </div>
+  </div>
+</main>
 <!-- body section card 2 -->
 {% if posts%}
 <div class="container">

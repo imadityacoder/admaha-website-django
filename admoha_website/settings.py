@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 MY_APPS = [
     'blog',
     'ckeditor',
+    'taggit',
 ]
 
 INSTALLED_APPS += MY_APPS
