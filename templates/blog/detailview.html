@@ -1,7 +1,13 @@
 {% extends "blog/main.html" %}
 
 {% block title %}{{blog.title}}{% endblock title %}
-
+{% block head %}
+<meta name="keywords" content="{{blog.tags}}">
+<meta name="description" content="{{blog.body|safe|truncatechars:200}}">
+<meta property="og:title" content="{{blog.title}}">
+<meta property="og:url" content="https://admoha.com/{{blog.slug}}" >
+<meta property="og:description" content="{% if blog.body %}{{blog.body|striptags|truncatechars:200}}{% else %}{% endif %}">
+{% endblock head %}
 {% block body %}
 <div class="container">
 
@@ -12,19 +18,24 @@
         {% if blog.author == request.user %}
         <a href="{% url 'updatepost' blog.slug%}">[update]</a>
         {% endif %}
-        {% if request.user.username == "aditya" or "vishalkr"%}
+        {% if request.user.username == "aditya"%}
         <a href="{% url 'deletepost' blog.slug%}">[delete]</a>
         {% endif %}
-
-        
     </div>
     
-    <img class="img-fluid" src="{{blog.img.url}}" alt="{{blog.img.url}}" style="width:100%;">
+    <img class="img-fluid" src="{{blog.img.url}}" alt="{{blog.title}}" style="width:100%;">
     <hr>
     <div>{{blog.body | safe}}</div>
     
-    <p><b>-Created by {{blog.author|upper}}</b></p>
+    <p><b>-Created by <a href="#">{{blog.author|upper}}</a></b></p>
 </div>
 <hr>
+
+<h2 style="text-align: right;" class="mx-4">Related Posts</h2>
+<ul>
+    {% for related_post in related_posts %}
+        <li style="list-style: none;text-align: right;" class="mx-4 my-1 p-1 border "><a href="{% url 'detailview' slug=related_post.slug %}">{{ related_post.title }}</a></li>
+    {% endfor %}
+</ul>
 
 {% endblock body %}

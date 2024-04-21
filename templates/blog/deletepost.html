@@ -6,7 +6,7 @@
 <h1>Delete post</h1>
 <form method="post" enctype="multipart/form-data">
     <hr>
-    <img src="{{blog.img.url}}" class="img-fluid" alt="{{blog.img.url}}" style="min-width:60%;">
+    <img src="{{blog.img.url}}" class="img-fluid" alt="{{blog.title}}" style="min-width:60%;">
     <h5>Delete the post <br>({{blog.title}})</h5>
     {% csrf_token %}
     <p>Are you sure!</p>

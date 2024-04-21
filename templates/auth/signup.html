@@ -31,11 +31,31 @@
         <label for="{{form.password2.name}}">Confirm Password</label>
         <span class="text-danger">{{form.password2.errors}}</span>
     </div>
+    <div class="form-check">
+      <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault" onclick="myFunction()">
+      <label class="form-check-label" for="flexCheckDefault">
+        Show Password
+      </label>
+    </div>
 
     <button class="btn btn-primary w-100 py-2 my-3" type="submit">Sign in</button>
     </form>
   </main>
-  <a href="/login">Already have an account.</a>
+  <a href="/login">Already have an account? login now.</a>
   
 </div>
+
+<script>
+  function myFunction() {
+  var p1 = document.getElementById("{{form.password1.name}}");
+  var p2 = document.getElementById("{{form.password2.name}}");
+  if (p1.type === "password") {
+    p1.type = "text";
+    p2.type = "text";
+  } else {
+    p1.type = "password";
+    p2.type = "password";
+  }
+} 
+</script>
 {% endblock body %}

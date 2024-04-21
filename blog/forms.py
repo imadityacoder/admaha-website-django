@@ -10,23 +10,28 @@ class BlogForm(forms.ModelForm):
 		fields = ['title', 'img']
 
 class AddForm(forms.ModelForm):
+
     class Meta:
         model = Blog
-        fields = ("title","category","img","body")
+        fields = ("title","category","tags","img","body")
         widgets = {
             "title":forms.TextInput(attrs={'class':'form-control'}),
             "category":forms.Select(attrs={'class':'form-control'}),
+            "tags":forms.TextInput(attrs={'class':'form-control'}),
             "img":forms.FileInput(),
             "body":forms.Textarea(attrs={'class':'form-control'}),
         }
 
+
 class UpdateForm(forms.ModelForm):
+    tags = forms.CharField(required=True)
     class Meta:
         model = Blog
-        fields = ("title","category","img","body")
+        fields = ("title","category","tags","img","body")
         widgets = {
             "title":forms.TextInput(attrs={'class':'form-control'}),
             "category":forms.Select(attrs={'class':'form-control'}),
+            "tags":forms.TextInput(attrs={'class':'form-control'}),
             "img":forms.FileInput(),
             "body":forms.Textarea(attrs={'class':'form-control'}),
         }
@@ -45,8 +50,7 @@ class ContactForm(forms.ModelForm):
 
 
 class SignUpForm(UserCreationForm):
-    email = forms.EmailField()
-
+    email = forms.EmailField(required=True)
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']

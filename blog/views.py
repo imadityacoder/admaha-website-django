@@ -9,10 +9,11 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout , authenticate 
+from .utils import send_admin_notification, send_user_notification
 
 
 def home(request):
-    posts=Blog.objects.order_by('-created_at') 
+    posts=Blog.objects.all()
     data = {"posts":posts}
     return render(request,'blog/home.html',data)
 
@@ -49,6 +50,13 @@ class detailview(DetailView):
     model = Blog
     template_name = "blog/detailview.html"
     slug_url_kwarg = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = self.get_object()
+        related_posts = Blog.objects.filter(category=post.category).exclude(slug=post.slug)[:4]  # Adjust the filtering logic as needed
+        context['related_posts'] = related_posts
+        return context
 
 
 class createpost(LoginRequiredMixin, CreateView):
@@ -91,14 +99,10 @@ def signup(request):
             if user is not None:
                 auth_login(request, user) 
                 return redirect('home') 
-        else:
-            messages.warning(request, f'Please fill Signup form properly!')
-            initial_data = {"username":'',"email":'',"password1":'',"password2":''}
-            form = SignUpForm(initial = initial_data)    
 
     else:
         initial_data = {"username":'',"email":'',"password1":'',"password2":''}
-        form = UserCreationForm(initial = initial_data)
+        form = SignUpForm(initial = initial_data)
     return render(request, 'auth/signup.html', {'form': form})
 
 def login(request):
@@ -110,9 +114,8 @@ def login(request):
             messages.success(request, f'Weclome, back {request.user.username}')
             return redirect('home')
         else:
-            messages.warning(request, f'User which you entered is not exist!')
-            initial_data = {"username":'',"password":''}
-            form = AuthenticationForm(initial = initial_data)
+            messages.warning(request, f"Please enter right password and username!")
+
     else:
         initial_data = {"username":'',"password":''}
         form = AuthenticationForm(initial = initial_data)

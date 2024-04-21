@@ -19,12 +19,29 @@
     <div class="form-floating m-1">
         <input type="password" class="form-control" id="{{form.password.name}}" placeholder="Password" name="{{form.password.name}}" value="{{form.password.value}}" >
         <label for="{{form.password.name}}">Password</label>
+        <div class="form-check">
+          <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault" onclick="myFunction()">
+          <label class="form-check-label" for="flexCheckDefault">
+            Show Password
+          </label>
+        </div>
         <span class="text-danger">{{form.password.errors}}</span>
     </div>
 
       <button class="btn btn-primary w-100 py-2 my-3" type="submit">Log in</button>
     </form>
-    <a href="/signup">Create a new account.</a>
+    <a href="/signup">No account? Create a new account.</a>
   </main>
 </div>
+
+<script>
+  function myFunction() {
+  var x = document.getElementById("{{form.password.name}}");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+} 
+</script>
 {% endblock body %}

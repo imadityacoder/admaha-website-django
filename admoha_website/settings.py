@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7^^urcm^a4ao-15q9i!p&m)yvzh(4yqtbm!2#r2u)z335hwi8#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['admoha.com', 'www.admoha.com']
 
 
 # Application definition
@@ -41,10 +41,13 @@ INSTALLED_APPS = [
 MY_APPS = [
     'blog',
     'ckeditor',
-    'taggit',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
 
 INSTALLED_APPS += MY_APPS
+
+SITE_ID = 1
 
 AUTHENTICATION_BACKENDS=[
     'django.contrib.auth.backends.ModelBackend',
@@ -83,26 +86,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'admoha_website.wsgi.application'
 
-TIME_ZONE =  'Asia/Kolkata'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.mysql',
-# 		'NAME': 'testDB',
-# 		'USER': 'root',
-# 		'PASSWORD': 'root',
-# 		'HOST':'localhost',
-# 		'PORT':'3306',
-# 	}
-# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'mainDB',
+		'USER': 'root',
+		'PASSWORD': 'root',
+		'HOST':'localhost',
+		'PORT':'3306',
+	}
 }
 
 
@@ -130,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE =  'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -154,5 +150,9 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 
-EMAIL_RECEIVING_USER = 'vishalxamit@gmail.com'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'iamadityacoder@gmail.com'
+# EMAIL_HOST_PASSWORD = 'aditya=hero1'
+# EMAIL_USE_TLS = True
