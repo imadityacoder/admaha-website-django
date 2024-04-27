@@ -30,12 +30,12 @@
     <p><b>-Created by <a href="#">{{blog.author|upper}}</a></b></p>
 </div>
 <hr>
-
+{%if related_posts%}
 <h2 style="text-align: right;" class="mx-4">Related Posts</h2>
 <ul>
     {% for related_post in related_posts %}
         <li style="list-style: none;text-align: right;" class="mx-4 my-1 p-1 border "><a href="{% url 'detailview' slug=related_post.slug %}">{{ related_post.title }}</a></li>
     {% endfor %}
 </ul>
-
+{%endif%}
 {% endblock body %}
