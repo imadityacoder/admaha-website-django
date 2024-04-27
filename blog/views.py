@@ -13,7 +13,7 @@ from .utils import send_admin_notification, send_user_notification
 
 
 def home(request):
-    posts=Blog.objects.all()
+    posts=Blog.objects.all()[:15]
     data = {"posts":posts}
     return render(request,'blog/home.html',data)
 
