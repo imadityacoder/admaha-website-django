@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'False'
+DEBUG = False
 
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
@@ -36,8 +36,6 @@ DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 SECRET_KEY = 'django-insecure-c_r7@!mbotce@f^pv^4z%#3@(#5eayj#bufn216k&9$uoiv%kc'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ["admoha.com",'www.admoha.com','.admoha.com']
 
@@ -118,7 +116,7 @@ DATABASES = {
         'NAME': os.path.expanduser('~/db.sqlite3'),
     }
 }
-# # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
 
 
 
