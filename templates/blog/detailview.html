@@ -8,13 +8,13 @@
 <meta property="og:url" content="https://admoha.com/{{blog.slug}}" >
 <meta property="og:description" content="{% if blog.body %}{{blog.body|striptags|truncatechars:200}}{% else %}{% endif %}">
 <style>
-    li{
+   .content li{
         text-align:left;
     }
 </style>
 {% endblock head %}
 {% block body %}
-<div class="container">
+<div class="container content">
 
     <div class="my-1">
         <h1 style="display: inline;">{{blog.title}}</h1>
