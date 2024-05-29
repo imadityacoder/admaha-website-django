@@ -2,6 +2,7 @@
 
 {% block title %}Delete post{% endblock title %}
 {% block body %}
+{% if user.is_superuser %}
 <div class="form-group container border p-5" style = "margin-bottom:220px;">
 <h1>Delete post</h1>
 <form method="post" enctype="multipart/form-data">
@@ -14,4 +15,9 @@
     <button type="btn" class="btn btn-primary"><a href = "{% url "home" %}" style="color:white;">NO, back</a></button>
 </form>
 </div>
+{% else %}
+<div class=" container my-4 border" style="padding-bottom:400px;">
+<p>NOT AUTHENTICATED</p>
+</div>
+{% endif %}
 {% endblock body %}

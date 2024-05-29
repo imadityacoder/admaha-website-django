@@ -3,25 +3,24 @@
 {% block title %}Home{% endblock title %}
 
 {% block head %}
-<meta name="keywords" content="admoha">
+<meta name="keywords" content="admoha,admoha.com">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:site_name" content="https://admoha.com">
+<meta property="og:site_name" content="https://www.admoha.com">
 <meta property="og:title" content="Admoha Blog"> 
-<meta property="og:description" content="">
 <meta property="og:type" content="blog">
 
 
 <style>
       .jumbotron {
-      background-image: url('https://t4.ftcdn.net/jpg/03/08/69/75/360_F_308697506_9dsBYHXm9FwuW0qcEqimAEXUvzTwfzwe.jpg');
+      background-image: url('https://cdn.leonardo.ai/users/6df2a64b-63cd-4138-9efc-5a89efa1e10e/generations/004c47b0-d2e3-46cf-bff5-104cf99b8fa4/variations/Default_laptop_coding_content_post_website_0_004c47b0-d2e3-46cf-bff5-104cf99b8fa4_0.jpg');
       background-size: cover;
       background-position: center;
       color: white; /* Text color */
       position: relative;
       overflow: hidden;
       z-index: -1;
-      padding: 120px 40px;
+      padding: 80px 40px;
       /* Hide overflow for dim effect */
     }
     /* Style for dim effect */
@@ -38,13 +37,19 @@
       color: rgb(255, 255, 255);
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       z-index: 2; /* Adjust the opacity for lighter text */
+      font-size: 1.5rem;
+      font-weight: 500;
     }
+    .lead{
+      font-size: 1rem;
+      font-weight: 400;
+	}
 </style>
 {% endblock head %}
 
 {% load static %}
 {% block body %}
-<div class="jumbotron jumbotron-fluid mb-4">
+<div class="jumbotron jumbotron-fluid mb-2">
   <div class="dim-overlay"></div>
   <div class="container text-center">
     <h1 class="display-4 text-light">Welcome to Our Website</h1>
@@ -82,17 +87,7 @@
   </div>
 </div>
 
-<main class="container-fluid ">
-  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-    <div class="col-lg-8 px-0">
-      <h1 class="display-4 fst-italic">Vision on authors</h1>
-          <p class="card-text mb-auto"><b>Aditya</b> is the author of this blog website, where he shares various types of information with the readers. Alongside Aditya, <b>Vishal</b> also contributes as a co-author, offering insights, tips, and knowledge on different topics. Together, they are like the storytellers behind the scenes, passionately sharing their expertise through engaging posts. Additionally, they actively promote their posts to reach a wider audience and help more people discover valuable information. You can learn more about them and their interests in the <a href="/about">about us</a> section of the blog.</p>
-          <p class="lead my-3"></p>
-    </div>
-    <div class="col-lg-4">
-    </div>
-  </div>
-</main>
+
 <!-- body section card 2 -->
 {% if posts%}
 <div class="container">

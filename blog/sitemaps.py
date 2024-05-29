@@ -3,8 +3,8 @@ from django.contrib.sitemaps import Sitemap
 
 
 class BlogSitemap(Sitemap):
-    changefreq = "monthly"
-    priority = 0.5
+    changefreq = "daily"
+    priority = 0.9
 
     def items(self):
         return Blog.objects.all()

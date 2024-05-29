@@ -5,7 +5,7 @@
 {% block body %}
 {% if user_posts %}
 <div class="container">
-  <h2>your posts</h2>
+  <h2>your posts ({{user_posts | length}})</h2>
   <div class="row">
     {% for post in user_posts%}
     <div class="col-lg-4 col-md-6 col-sm-12 my-3 ">
@@ -17,7 +17,7 @@
                 <h2 class="card-text">{{post.title}}</h2>
                 <small class="text-body-secondary pb-3">({{post.category}})</small>
                 <small class="text-body-secondary pb-3">Created by -{{post.author}}</small>
-                <p class="card-text">{{post.body | safe |truncatechars:155}}</p>
+                <p class="card-text">{{post.body | safe |truncatechars:90}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary">{{post.created_at}}</small>
                 </div>

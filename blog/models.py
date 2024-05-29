@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from django.urls import reverse
 
+
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=255,unique=True)

@@ -13,7 +13,7 @@ from .utils import send_admin_notification, send_user_notification
 
 
 def home(request):
-    posts=Blog.objects.all()[:15]
+    posts=Blog.objects.all()[:12]
     data = {"posts":posts}
     return render(request,'blog/home.html',data)
 
@@ -83,7 +83,7 @@ class deletepost(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('home')
     def form_valid(self, form):
         title = form.cleaned_data.get('title')
-        messages.warning(self.request, f'You deleted the {title}.')
+        messages.warning(self.request, f'Successfully deleted!.')
         return super().form_valid(form)
 
 
@@ -137,3 +137,9 @@ def userposts(request,username):
     except:
         data ={"user":user}   
     return render(request,'auth/userposts.html',data)
+
+def privacypolicy(request):
+    return render(request,"blog/privacypolicy.html")
+
+def terms_of_use(request):
+    return render(request, 'blog/termsofuse.html')
