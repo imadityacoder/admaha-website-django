@@ -36,15 +36,45 @@
     
     <p><b>-Created by <a href="#">{{blog.author|upper}}</a></b></p>
 </div>
-<hr>
-{%if related_posts%}
-<h2 style="text-align: right;" class="mx-4">Related Posts</h2>
-<ul>
-    {% for related_post in related_posts %}
-        <li style="list-style: none;text-align: right;" class="mx-4 my-1 p-1 border "><a href="{% url 'detailview' slug=related_post.slug %}">{{ related_post.title }}</a></li>
-    {% endfor %}
-</ul>
-{%endif%}
+  <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Comments</h5>
+            {% for comment in comments %}
+                <div class="mb-3">
+                    <p>{{ comment.text }}</p>
+                    <p class="text-muted">By {{ comment.author }} on {{ comment.created_at }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add a Comment</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                </form>
+            </div>
+        </div>
+    <div class="mt-4">
+        <h5 class="card-title">Related Posts</h5>
+        <div class="row">
+            {% for related_post in related_posts %}
+                <div class="col-md-3">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ related_post.title }}</h5>
+                            <p class="card-text">{{ related_post.body|truncatewords:20 }}</p>
+                            <a href="{% url 'detail' slug=related_post.slug %}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div> 
 </div>
 {% endblock body %}
 

@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from django.views.generic import CreateView,DeleteView,UpdateView,DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Blog,Category ,Contact
+from .models import Blog,Category ,Contact, Comment
 from django.contrib.auth.models import User
-from .forms import AddForm,UpdateForm ,ContactForm,SignUpForm
+from .forms import AddForm,UpdateForm ,ContactForm,SignUpForm,CommentForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -13,7 +13,7 @@ from .utils import send_admin_notification, send_user_notification
 
 
 def home(request):
-    posts=Blog.objects.all()[:12]
+    posts=Blog.objects.all()
     data = {"posts":posts}
     return render(request,'blog/home.html',data)
 
@@ -44,7 +44,6 @@ def category(request,cat):
     except:
         data ={"cat":cat}   
     return render(request,'blog/category.html',data)
-    
 
 class detailview(DetailView):
     model = Blog
@@ -54,10 +53,28 @@ class detailview(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = self.get_object()
-        related_posts = Blog.objects.filter(category=post.category).exclude(slug=post.slug)[:4]  # Adjust the filtering logic as needed
+        related_posts = Blog.objects.filter(category=post.category).exclude(slug=post.slug)[:4]
         context['related_posts'] = related_posts
+        context['comments'] = post.comments.all()
+
+        if self.request.user.is_authenticated:
+            context['comment_form'] = CommentForm()
+        else:
+            context['comment_form'] = None
+
         return context
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if request.user.is_authenticated:
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.post = self.object
+                comment.author = request.user
+                comment.save()
+                return redirect('detailview', slug=self.object.slug)
+        return redirect('login')
 
 class createpost(LoginRequiredMixin, CreateView):
     model = Blog
