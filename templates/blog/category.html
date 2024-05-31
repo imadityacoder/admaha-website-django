@@ -10,7 +10,7 @@
   <h2>{{cat}} ({{category_posts | length}})</h2>
   <div class="row">
     {% for posts in category_posts%}
-    <div class="col-lg-4 col-md-6 col-sm-12 my-3 ">
+    <div class="col-lg-4 col-md-6 col-sm-12 my-3 wraper">
             <a href = {% url "detailview" posts.slug%}>
             <div class="card shadow-sm">
               <img src="{{post.img.url}}" alt="{{post.title}}" class="img-fluid" style="height:230px;">
