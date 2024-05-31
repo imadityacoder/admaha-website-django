@@ -45,6 +45,7 @@ def category(request,cat):
         data ={"cat":cat}   
     return render(request,'blog/category.html',data)
 
+
 class detailview(DetailView):
     model = Blog
     template_name = "blog/detailview.html"
@@ -53,28 +54,9 @@ class detailview(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = self.get_object()
-        related_posts = Blog.objects.filter(category=post.category).exclude(slug=post.slug)[:4]
+        related_posts = Blog.objects.filter(category=post.category).exclude(slug=post.slug)[:5]  # Adjust the filtering logic as needed
         context['related_posts'] = related_posts
-        context['comments'] = post.comments.all()
-
-        if self.request.user.is_authenticated:
-            context['comment_form'] = CommentForm()
-        else:
-            context['comment_form'] = None
-
         return context
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        if request.user.is_authenticated:
-            comment_form = CommentForm(request.POST)
-            if comment_form.is_valid():
-                comment = comment_form.save(commit=False)
-                comment.post = self.object
-                comment.author = request.user
-                comment.save()
-                return redirect('detailview', slug=self.object.slug)
-        return redirect('login')
 
 class createpost(LoginRequiredMixin, CreateView):
     model = Blog

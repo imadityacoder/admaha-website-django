@@ -1,7 +1,7 @@
 {% extends "blog/main.html" %}
 
-{% block title %}{{blog.title}}{% endblock title %}
 {% block head %}
+<title>{{blog.title}}</title>
 <meta name="keywords" content="{{blog.tags}}">
 <meta name="description" content="{{blog.body|safe|truncatechars:200}}">
 <meta property="og:title" content="{{blog.title}}">
@@ -13,7 +13,6 @@
     }
 </style>
 {% endblock head %}
-
 {% block body %}
 <div class= "container" style="max-width:900px;">
 <div class="container content">
@@ -35,7 +34,16 @@
     <div>{{blog.body | safe}}</div>
     
     <p><b>-Created by <a href="#">{{blog.author|upper}}</a></b></p>
-</div> 
+</div>
+<hr>
+{% if related_posts %}
+<h2 style="text-align: right;" class="mx-4">Related Posts</h2>
+<ul>
+    {% for related_post in related_posts %}
+        <li style="list-style: none;text-align: right; border-radius: 5px;" class="mx-4 my-1 p-1 border"><a href="{% url 'detailview' slug=related_post.slug %}">{{ related_post.title }}</a></li>
+    {% endfor %}
+</ul> 
+{% endif %}
 </div>
 {% endblock body %}
 

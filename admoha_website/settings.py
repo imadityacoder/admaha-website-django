@@ -24,7 +24,7 @@ DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 SECRET_KEY = 'django-insecure-c_r7@!mbotce@f^pv^4z%#3@(#5eayj#bufn216k&9$uoiv%kc'
 
 
-ALLOWED_HOSTS = ["admoha.com",'www.admoha.com','.admoha.com']
+ALLOWED_HOSTS = ["admoha.com",'www.admoha.com','.admoha.com','127.0.0.1']
 
 
 # Application definition

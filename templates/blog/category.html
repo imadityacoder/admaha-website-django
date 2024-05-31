@@ -1,7 +1,9 @@
 {% extends "blog/main.html" %}
 
 {% block title %}{{cat}}{% endblock title %}
-
+{% block head %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock head %}
 {% block body %}
 {% if category_posts %}
 <div class="container">
@@ -11,8 +13,7 @@
     <div class="col-lg-4 col-md-6 col-sm-12 my-3 ">
             <a href = {% url "detailview" posts.slug%}>
             <div class="card shadow-sm">
-              <img src="{{posts.img.url}}"
-                alt="{{posts.img.url}}">
+              <img src="{{post.img.url}}" alt="{{post.title}}" class="img-fluid" style="height:230px;">
               <div class="card-body">
                 <h2 class="card-text">{{posts.title}}</h2>
                 <small class="text-body-secondary pb-3">({{posts.category}})</small>
@@ -27,6 +28,7 @@
           </div>
           {% endfor %}
         </div>
+        <button class=" btn btn-primary btn-sm mx-auto my-2" id='showmore-btn'>show more</button>
       </div>
 {% else %}
 <div class="container m-auto p-4">
@@ -35,4 +37,37 @@
 
 </div>   
 {% endif %}
+<script>
+  $(document).ready(function() {
+    var visiblePosts = 6;
+    var increment = 6;
+    var totalPosts = {{ posts.count }};
+    
+    // Function to display posts
+    function displayPosts() {
+      $('.wraper').hide(); // Hide all posts
+      $('.wraper').slice(0, visiblePosts).show(); // Show the first 'visiblePosts' posts
+    }
+    
+    // Function to load more posts
+    function loadMorePosts() {
+      visiblePosts += increment;
+      displayPosts();
+      
+      // Hide the load more button if all posts are visible
+      if (visiblePosts >= totalPosts) {
+        $('.showmore-btn').hide();
+      }
+    }
+    
+    // Load more posts when the load more button is clicked
+    $('#showmore-btn').on('click', function() {
+      loadMorePosts();
+    });
+    
+    // Initial display of posts
+    displayPosts();
+  });
+  
+</script>
 {% endblock body %}
