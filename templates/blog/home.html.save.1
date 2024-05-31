@@ -44,9 +44,6 @@
       font-size: 1rem;
       font-weight: 400;
 	}
-    .wraper{
-	diplay:none;
-	}
 </style>
 {% endblock head %}
 
@@ -95,9 +92,9 @@
 {% if posts%}
 <div class="container">
   <h2>recent post</h2>
-  <div class="row">
+  <div class="row wraper">
     {% for post in posts %}
-    <div class="col-lg-4 col-md-6 col-sm-12 my-3 wraper">
+    <div class="col-lg-4 col-md-6 col-sm-12 my-3 d-none">
       <a href={% url "detailview" post.slug%}>
         <div class="card shadow-sm">
          
@@ -117,27 +114,14 @@
     </div>
     {% endfor %}
   </div>
-  <div class="d-grid gap-2  mx-auto">
-  <button class="showmore-btn btn btn-primary btn-sm mx-auto" type="button">show more</button>
+  <div class="d-grid gap-2 d-lg-block mx-auto">
+  <button class="showmore-btn btn btn-primary" type="button">show more</button>
   </div>
 </div>
 {% endif %}
 <script>
-var wraper = document.querySelectorAll('.wraper');
-var btn = document.querySelector('.showmore-btn');
-console.log(wraper.length)
-var currenting = 6
-
-btn.addEventListener('click',function(){
-    console.log("show more")
-    for (var i= currenting; i < currenting + 6; i++) {
-	if (wraper[i].style.display === 'none') {
-	    wraper[i].style.display = 'block';
-
-	}
-
-    }
-    currenting += 6;
-})
-</script>
+var wraper = document.querySelectorAll(".wraper");
+var btn =  document.querySelector(".showmore-btn")
+function
+()</script>
 {% endblock body %}
