@@ -11,8 +11,7 @@
     <div class="col-lg-4 col-md-6 col-sm-12 my-3 ">
             <a href = {% url "detailview" post.slug%}>
             <div class="card shadow-sm">
-              <img src="{{post.img.url}}"
-                alt="{{post.img.url}}">
+              <img src="{{post.img.url}}" alt="{{post.title}}" class="img-fluid" style="height:230px;">
               <div class="card-body">
                 <h2 class="card-text">{{post.title}}</h2>
                 <small class="text-body-secondary pb-3">({{post.category}})</small>

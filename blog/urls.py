@@ -13,6 +13,7 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('<str:username>/posts/',views.userposts,name="userposts"),
+    path('sitemap.xml', views.sitemap, name='sitemap'),
 
     path('category/<str:cat>/', views.category, name='category'),
     path('create/', views.createpost.as_view(), name='createpost'),

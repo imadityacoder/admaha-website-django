@@ -18,13 +18,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.sitemaps.views import sitemap
-from blog.sitemaps import BlogSitemap
-from django.views.generic import TemplateView
 
-sitemaps = {
-    'blog': BlogSitemap,
-}
 
 admin.site.site_header = "Admoha Dashboard"
 admin.site.site_title = "Admoha Dasboard"
@@ -35,5 +29,4 @@ admin.site.index_title = "Admoha.com"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},name='django.contrib.sitemaps.views.sitemap'),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

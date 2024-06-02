@@ -3,17 +3,15 @@
 
 {% block head %}
 <meta name="keywords" content="admoha,admoha.com,blog">
-<meta name="description"
-  content="Discover Admoha.com, your seamless blogging solution. With BlogEase, writers of all levels can effortlessly express themselves, share thoughts, and engage with a vibrant community. Effortlessly create, publish, and manage blog posts anytime, anywhere, with Admoha.com's intuitive interface.">
+<meta name="description" content="Discover Admoha.com, your seamless blogging solution. With BlogEase, writers of all levels can effortlessly express themselves, share thoughts, and engage with a vibrant community. Effortlessly create, publish, and manage blog posts anytime, anywhere, with Admoha.com's intuitive interface.">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta property="og:site_name" content="https://www.admoha.com">
 <meta property="og:title" content="Admoha">
 <meta property="og:type" content="blog">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
   .jumbotron {
-    background-image: url('https://cdn.leonardo.ai/users/6df2a64b-63cd-4138-9efc-5a89efa1e10e/generations/004c47b0-d2e3-46cf-bff5-104cf99b8fa4/variations/Default_laptop_coding_content_post_website_0_004c47b0-d2e3-46cf-bff5-104cf99b8fa4_0.jpg');
+    background-image: url('/profile.png');
     background-size: cover;
     background-position: center;
     color: white;
@@ -21,7 +19,7 @@
     position: relative;
     overflow: hidden;
     z-index: -1;
-    padding: 80px 40px;
+    padding: 100px 40px;
     /* Hide overflow for dim effect */
   }
 
@@ -54,6 +52,9 @@
   .wraper {
     display: none;
   }
+  #showmore-btn{
+	display:block;
+  }
 </style>
 {% endblock head %}
 
@@ -66,59 +67,45 @@
     <p class="lead text-light">Discover Admoha.com, your seamless blogging solution. With BlogEase, writers of all
       levels can effortlessly express themselves, share thoughts, and engage with a vibrant community. Effortlessly
       create, publish, and manage blog posts anytime, anywhere, with Admoha.com's intuitive interface.</p>
-
-
-
-
   </div>
 </div>
 
-<div class="container" data-bs-theme="dark">
+<div class="container mt-2" data-bs-theme="dark">
   <div class="row mb-2">
-
     <div class="col-12">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-
           {% if user.is_authenticated %}
           <h5>Create a Post now</h5>
-          <a class="btn btn-info my-2" href="{% url "createpost" %}" class="text-light">Create a Post</a>
+          <a class="btn btn-info my-2" href="{% url 'createpost' %}" class="text-light">Create a Post</a>
           {% else %}
-          <h5>Create a Account now</h5>
-          <a class="btn btn-info my-2" href="{% url " login" %}" class="text-light">Login</a>
-          <a class="btn btn-primary my-2" href="{% url " signup" %}" class="text-light">Signup</href=>
-
-
-            {% endif %}
-          </a>
+          <h5>Create an Account now</h5>
+          <a class="btn btn-info my-2" href="{% url 'login' %}" class="text-light">Login</a>
+          <a class="btn btn-primary my-2" href="{% url 'signup' %}" class="text-light">Signup</a>
+          {% endif %}
         </div>
       </div>
     </div>
-
-
   </div>
 </div>
 
-
 <!-- body section card 2 -->
-{% if posts%}
+{% if posts %}
 <div class="container">
-  <h2>recent post</h2>
+  <h2>Recent Posts</h2>
   <div class="row">
     {% for post in posts %}
     <div class="col-lg-4 col-md-6 col-sm-12 my-3 wraper">
-      <a href='{% url "detailview" post.slug%}'>
+      <a href='{% url "detailview" post.slug %}'>
         <div class="card shadow-sm">
-
-          <img src="{{post.img.url}}" alt="{{post.title}}" class="img-fluid" style="height:230px;">
-
+          <img src="{{ post.img.url }}" alt="{{ post.title }}" class="img-fluid" style="height:230px;">
           <div class="card-body">
-            <h2 class="card-text">{{post.title}}</h2>
-            <small class="text-body-secondary pb-3">({{post.category}})</small>
-            <small class="text-body-secondary pb-3">Created by -{{post.author}}</small>
-            <p class="card-text">{{post.body |safe |truncatechars:90}}</p>
+            <h2 class="card-text">{{ post.title }}</h2>
+            <small class="text-body-secondary pb-3">({{ post.category }})</small>
+            <small class="text-body-secondary pb-3">Created by - {{ post.author }}</small>
+            <p class="card-text">{{ post.body|safe|truncatechars:90 }}</p>
             <div class="d-flex justify-content-between align-items-center">
-              <small class="text-body-secondary">{{post.created_at}}</small>
+              <small class="text-body-secondary">{{ post.created_at }}</small>
             </div>
           </div>
         </div>
@@ -126,10 +113,11 @@
     </div>
     {% endfor %}
   </div>
-
-    <button class=" btn btn-primary btn-sm mx-auto my-2" id='showmore-btn'>show more</button>
+  <button class="btn btn-primary btn-sm mx-auto my-3" id="showmore-btn">more</button>
 </div>
 {% endif %}
+<hr>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function() {
     var visiblePosts = 6;
@@ -149,7 +137,7 @@
       
       // Hide the load more button if all posts are visible
       if (visiblePosts >= totalPosts) {
-        $('.showmore-btn').hide();
+        $('#showmore-btn').hide();
       }
     }
     

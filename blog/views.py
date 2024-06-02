@@ -10,7 +10,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout , authenticate 
 from .utils import send_admin_notification, send_user_notification
-
+from django.contrib.sites.models import Site
+from django.template.loader import render_to_string
 
 def home(request):
     posts=Blog.objects.all()
@@ -142,3 +143,16 @@ def privacypolicy(request):
 
 def terms_of_use(request):
     return render(request, 'blog/termsofuse.html')
+
+def sitemap(request):
+    current_site = Site.objects.get_current()
+    posts = Blog.objects.all()
+    categories = Category.objects.all()
+    
+    sitemap_content = render_to_string('sitemap_template.xml', {
+        'site': current_site,
+        'posts': posts,
+        'categories': categories,
+    })
+    
+    return HttpResponse(sitemap_content, content_type='application/xml')

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>{{ site }}</loc>
+        <priority>1.0</priority>
+    </url>
+    {% for category in categories %}
+    <url>
+        <loc>{{ site }}{{ category.get_absolute_url }}</loc>
+        <lastmod>{{ category.updated_at|date:"Y-m-d" }}</lastmod>
+        <priority>0.8</priority>
+    </url>
+    {% endfor %}
+    {% for post in posts %}
+    <url>
+        <loc>{{ site }}{{ post.get_absolute_url }}</loc>
+        <lastmod>{{ post.updated_at|date:"Y-m-d" }}</lastmod>
+        <priority>0.9</priority>
+    </url>
+    {% endfor %}
+
+    <url>
+        <loc>https://www.admoha.com/privacy-policy/</loc>
+        <lastmod>2024-05-31T15:46:23+00:00</lastmod>
+        <priority>0.80</priority>
+      </url>
+      <url>
+        <loc>https://www.admoha.com/terms-of-use/</loc>
+        <lastmod>2024-05-31T15:46:23+00:00</lastmod>
+        <priority>0.80</priority>
+      </url>
+      <url>
+        <loc>https://www.admoha.com/login/</loc>
+        <lastmod>2024-05-31T15:46:23+00:00</lastmod>
+        <priority>0.80</priority>
+      </url>
+      <url>
+        <loc>https://www.admoha.com/signup/</loc>
+        <lastmod>2024-05-31T15:46:23+00:00</lastmod>
+        <priority>0.80</priority>
+      </url>
+      <url>
+        <loc>https://www.admoha.com/about/</loc>
+        <lastmod>2024-05-31T15:46:23+00:00</lastmod>
+        <priority>0.80</priority>
+      </url>
+      <url>
+        <loc>https://www.admoha.com/contact/</loc>
+        <lastmod>2024-05-31T15:46:23+00:00</lastmod>
+        <priority>0.80</priority>
+      </url>
+      
+</urlset>
