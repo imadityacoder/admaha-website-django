@@ -34,7 +34,7 @@ class Blog(models.Model):
     updated_on = models.DateField(auto_now= True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-updated_on']
 
     def __str__(self):
         return self.title + " | " + str(self.author)

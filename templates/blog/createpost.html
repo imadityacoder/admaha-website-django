@@ -1,7 +1,44 @@
 {% extends "blog/main.html" %}
-
+{% load static %}
 {% block title %}Create Post{% endblock title %}
+{% block head %}
+<script>
+    // static/js/ckeditor_wordcount.js
 
+document.addEventListener("DOMContentLoaded", function() {
+    if (typeof CKEDITOR !== 'undefined') {
+        CKEDITOR.on('instanceReady', function(event) {
+            var editor = event.editor;
+            var submitButton = document.querySelector("button[type='submit']");
+            var wordCountDisplay = document.createElement("div");
+            var minWords = 800; // Minimum word count
+            var wordCountText = `0-${minWords} words`;
+            wordCountDisplay.textContent = wordCountText;
+            wordCountDisplay.style.marginTop = "10px";
+            wordCountDisplay.style.fontWeight = "500";
+            wordCountDisplay.style.textAlign = "right";
+
+            editor.container.$.parentNode.insertBefore(wordCountDisplay, editor.container.$.nextSibling);
+
+            function updateWordCount() {
+                var text = editor.getData().replace(/<[^>]*>/g, ''); // Remove HTML tags
+                var wordCount = text.trim().split(/\s+/).length;
+                wordCountDisplay.textContent = `${wordCount}-${minWords} words`;
+                if (wordCount < minWords) { // Minimum word count
+                    submitButton.disabled = true;
+                } else {
+                    submitButton.disabled = false;
+                }
+            }
+
+            editor.on('blur', updateWordCount);
+            editor.on('key', updateWordCount); // Check word count on key events
+        });
+    }
+});
+
+</script>
+{% endblock head %}
 {% block body %}
 <div class="form-group container my-3 border p-3">
     <h1>Add a new post</h1>
